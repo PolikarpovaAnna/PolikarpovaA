@@ -1,58 +1,169 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Job1
+
+
+namespace job2
+
 {
-    internal class Discr
+    internal class lab2
     {
-        private class Discr1
+        abstract class GeometryFigure :ICode
         {
-            public double h, h1, h2;
-            public static double EnterData()
-            {
-                double ddata;
-                while (!Double.TryParse(Console.ReadLine(), out ddata))
-                {
-                    Console.Write("Enter data\n");
-                }
-                return ddata;
-            }
-            private double claDiscriminant()
-            {
-                return Math.Pow(h1, 2) - 4 * h * h2;
-            }
-            public void claRoots()
-            {
-                double D = claDiscriminant();
-                if (D < 0)
-                {
-                    Console.Write("roots do not exist ( real numbers)");
-                    return;
-                }
-                if (D == 0)
-                {
-                    Console.Write("Answer is {0}", -h1 / 2 * h);
-                    return;
-                }
-                if (D > 0)
-                {
-                    Console.Write("Answer is {0} and {1}", (-h1 + Math.Sqrt(D)) / 2 * h, (-h1 - Math.Sqrt(D)) / 2 * h);
-                }
-            }
+
+            protected abstract double calcArea();
+
+            protected abstract String ObjectToString();
+
+            public abstract void Code();
+
         }
+        
+        class Rectangle : GeometryFigure
+
+        {
+
+            private double width, height;
+
+            public Rectangle(double width, double height)
+
+            {
+
+                this.width = width;
+
+                this.height = height;
+
+            }
+
+            public Rectangle()
+
+            {
+
+            }
+            protected override double calcArea()
+
+            {
+
+                return width * height;
+
+            }
+
+
+            protected override String ObjectToString()
+
+            {
+
+                return $"Object:Rectangle\nWidth = {width}\nHeight = {height}\nArea = {calcArea()}\n";
+
+            }
+
+            public override void Code()
+
+            {
+
+                Console.Write(ObjectToString());
+
+            }
+
+        }
+
+        class Square : Rectangle
+
+        {
+
+            private double mSide;
+
+            public Square(double mSide)
+
+            {
+
+                this.mSide = mSide;
+
+            }
+
+            protected override double calcArea()
+
+            {
+
+                return Math.Pow(mSide, 2);
+
+            }
+
+            protected override String ObjectToString()
+
+            {
+
+                return $"Object:Square\nSide:{mSide}\nArea = {calcArea()}\n";
+
+            }
+
+            public override void Code()
+
+            {
+
+                Console.Write(ObjectToString());
+
+            }
+
+        }
+
+        class Circle : GeometryFigure
+
+        {
+
+            private double mRadius;
+
+            public Circle(double mRadius)
+
+            {
+
+                this.mRadius = mRadius;
+
+            }
+
+            protected override double calcArea()
+
+            {
+
+                return Math.PI * Math.Pow(mRadius, 2);
+
+            }
+
+            protected override String ObjectToString()
+
+            {
+
+                return $"Object: Circle\nRadius = {mRadius}\nArea = {calcArea()}\n";
+
+            }
+
+            public override void Code()
+
+            {
+
+                Console.Write(ObjectToString());
+
+            }
+
+        }
+
         public static void Main(string[] args)
+
         {
-            Discr1 mDiscr1 = new Discr1();
-            mDiscr1.h = Discr1.EnterData();
-            mDiscr1.h1 = Discr1.EnterData();
-            mDiscr1.h2 = Discr1.EnterData();
-            mDiscr1.claRoots();
+
+            Rectangle mRectangle = new Rectangle(10, 10);
+
+            Square mSquare = new Square(10);
+
+            Circle mCircle = new Circle(10);
+
+            mRectangle.Code();
+
+            mSquare.Code();
+
+            mCircle.Code();
+
         }
+
     }
+
 }
-
-
-
